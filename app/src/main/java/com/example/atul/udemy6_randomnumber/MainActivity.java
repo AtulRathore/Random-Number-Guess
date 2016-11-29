@@ -11,26 +11,30 @@ import java.util.Random;
 public class MainActivity extends AppCompatActivity {
 
     int randomnumber;
-
     EditText editText;
-    public void guess(View view){
 
+    public  void makeToast(String str){
+        Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+    }
+
+    public void guess(View view){
 
         editText = (EditText) findViewById(R.id.editText);
         String num = editText.getText().toString().trim();
 
         int guessInt= Integer.parseInt(num);
 
-        /*num.isEmpty() || num.length()==0 || num.equals("")|| num==null
-        if(guessInt){
-            Toast.makeText(this, "Please enter a number", Toast.LENGTH_SHORT).show();
-        }*/
         if (guessInt>randomnumber){
-            Toast.makeText(this, "Little lower", Toast.LENGTH_SHORT).show();
+            makeToast("Little lower");
         }else if (guessInt<randomnumber){
-            Toast.makeText(this, "Little Higher", Toast.LENGTH_SHORT).show();
+            makeToast("Little Higher");
         }else {
-            Toast.makeText(this, "Right", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Right, Try Again", Toast.LENGTH_SHORT).show();
+
+            Random r = new Random();
+            int low =1;
+            int high = 20;
+            randomnumber = r.nextInt(high-low)+low;
         }
         editText.getText().clear();
 
